@@ -29,7 +29,7 @@ _(You're going to have to change some of the variables at the top of `modules/op
 
 _Work in progress..._
 
-     sudo apt-get install libcups2-dev libc6-dev-i386 libglib2.0-dev libgtk2.0-dev libglade2-dev intltool
+     sudo apt-get install libcups2-dev libc6-dev-i386 libglib2.0-dev libgtk2.0-dev libglade2-dev intltool libtool-bin
 
      wget -O ~/capt-2.6.tar.gz http://pdisp01.c-wss.com/gdl/WWUFORedirectTarget.do?id=MDEwMDAwNDU5NjAz&cmp=ABS&lang=EN
      cd ~/ && tar xvzf capt-2.6.tar.gz
