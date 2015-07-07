@@ -5,7 +5,7 @@ $gcc_version = "4.8"
 $libc_version = "0.9.33.2"
 
 $staging_dir = "/home/vagrant/openwrt/staging_dir"
-$toolchain_dir = "${staging_dir}/toolchain-${opnwrt_platform}_gcc-${gcc_version}-linaro_uClibc-${libc_version}"
+$toolchain_dir = "${staging_dir}/toolchain-${openwrt_platform}_gcc-${gcc_version}-linaro_uClibc-${libc_version}"
 
 
 package { ["git-core", "build-essential", "libssl-dev", "libncurses5-dev",
@@ -22,7 +22,7 @@ vcsrepo { "/home/vagrant/openwrt":
 }
 
 file { "/etc/profile.d/env.sh":
-  content => "unset SED && export PATH=\$PATH:${staging_dir}/host/bin:${toolchain_dir}/bin STAGING_DIR=${toolchain_dir} CC=${arch}-openwrt-linux-uclibc-gcc LD=${arch}-openwrt-linux-uclibc-ld host_alias=${arch}-openwrt-linux-uclibc build_alias=${arch}-unknown-linux-gnu C_INCLUDE_PATH=/usr/include",
+  content => "unset SED && export PATH=\$PATH:${staging_dir}/host/bin:${toolchain_dir}/bin STAGING_DIR=${toolchain_dir} CC=${arch}-openwrt-linux-uclibc-gcc LD=${arch}-openwrt-linux-uclibc-ld host_alias=${arch}-openwrt-linux-uclibc build_alias=${arch}-unknown-linux-gnu CFLAGS=${toolchain_dir}/include LDFLAGS=${toolchain_dir}/lib",
   mode => 755,
   require => Vcsrepo["/home/vagrant/openwrt"],
 }

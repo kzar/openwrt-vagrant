@@ -12,7 +12,7 @@ Simple Vagrantfile for creating a Debian based [OpenWrt Buildroot](http://wiki.o
      vagrant ssh
 
      # Clear cross compilation environment variables
-     unset CC LD STAGING_DIR host_alias build_alias C_INCLUDE_PATH
+     unset CC LD STAGING_DIR host_alias build_alias CFLAGS LDFLAGS
 
      # Configure and build OpenWrt
      cd ~/openwrt
@@ -29,13 +29,13 @@ _(You're going to have to change some of the variables at the top of `modules/op
 
 _Work in progress..._
 
-     sudo apt-get install libcups2-dev libc6-dev-i386 libglib2.0-dev libgtk2.0-dev libglade2-dev
+     sudo apt-get install libcups2-dev libc6-dev-i386 libglib2.0-dev libgtk2.0-dev libglade2-dev intltool
 
-     wget http://pdisp01.c-wss.com/gdl/WWUFORedirectTarget.do?id=MDEwMDAwNDU5NjAz&cmp=ABS&lang=EN -O ~/capt-2.6.tar.gz
+     wget -O ~/capt-2.6.tar.gz http://pdisp01.c-wss.com/gdl/WWUFORedirectTarget.do?id=MDEwMDAwNDU5NjAz&cmp=ABS&lang=EN
      cd ~/ && tar xvzf capt-2.6.tar.gz
      cd ~/Linux_CAPT_PrinterDriver_V260_uk_EN/Src
      tar xvzf cndrvcups-common-2.60-1.tar.gz
-     tar -xvzf cndrvcups-capt-2.60-1.tar.gz
+     tar xvzf cndrvcups-capt-2.60-1.tar.gz
 
      cd cndrvcups-common-2.60-1 && make gen      # KABOOM! :(
      cd ../cndrvcups-capt-2.60-1 && ./allgen.sh
