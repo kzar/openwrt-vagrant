@@ -1,0 +1,38 @@
+#!/usr/bin/python
+import glob
+import os
+import subprocess
+import sys
+
+staging_dir = "/home/vagrant/openwrt/staging_dir"
+toolchain_dir = max(glob.iglob(os.path.join(staging_dir, "toolchain-*")),
+                    key=os.path.getctime)
+
+include_dirs = glob.glob("/home/vagrant/openwrt/package/libs/*/src/include/")
+include_dirs.append(os.path.join(toolchain_dir, "include"))
+
+gcc_suffix = "-openwrt-linux-uclibc-gcc"
+try:
+  gcc = os.path.basename(glob.iglob(os.path.join(toolchain_dir, "bin",
+                                                 "*" + gcc_suffix)).next())
+except StopIteration:
+  print "You must first build the OpenWrt Buildroot!"
+  sys.exit(1)
+arch = gcc[:-len(gcc_suffix)]
+
+os.environ["SED"] = ""
+os.environ["PATH"] = (os.environ["PATH"] + ":" +
+                      os.path.join(toolchain_dir, "bin"))
+os.environ["STAGING_DIR"] = toolchain_dir
+os.environ["CC"] = gcc
+os.environ["LD"] = arch + "-openwrt-linux-uclibc-ld"
+os.environ["host_alias"] = arch + "-openwrt-linux-uclibc"
+os.environ["build_alias"] = arch + "-unknown-linux-gnu"
+os.environ["CFLAGS"] = " ".join(["-I%s" % d for d in include_dirs])
+os.environ["LDFLAGS"] = "-L" + os.path.join(toolchain_dir, "lib")
+
+if len(sys.argv) < 2:
+  print "Usage: cross-compile compile-command"
+  sys.exit(1)
+
+subprocess.call(sys.argv[1:])

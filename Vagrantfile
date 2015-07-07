@@ -16,8 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet module install puppetlabs-vcsrepo
     "
     config.vm.provision "puppet" do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
+      puppet.manifests_path = ""
       puppet.manifest_file = "openwrt.pp"
     end
 
