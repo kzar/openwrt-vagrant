@@ -36,5 +36,8 @@ Next you can cross compile things for buildroot using the `cross-compile` script
      tar xvzf cndrvcups-common-2.60-1.tar.gz
      tar xvzf cndrvcups-capt-2.60-1.tar.gz
 
-     cd cndrvcups-common-2.60-1 && cross-compile make gen # KABOOM!
-     cd ../cndrvcups-capt-2.60-1 && cross-compile sh all-get.sh
+     cd cndrvcups-common-2.60-1 && cross-compile make gen
+     # KABOOM! - cups/cups.h is missing, despite all packages being installed.
+     #           Not sure how to fix that, I can't find it either
+
+     cd ../cndrvcups-capt-2.60-1 && cross-compile sh allgen.sh
