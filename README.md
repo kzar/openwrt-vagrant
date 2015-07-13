@@ -15,7 +15,8 @@ First of all you will need to create a VM and build OpenWrt Build root
 
      # Configure and build OpenWrt
      cd ~/openwrt
-     make menuconfig
+     make menuconfig   # (Make sure you select Network/Printing/Cups if you're
+                       #  attempting to compile the Cannon CAPT driver too!)
      make
 
 Next you can cross compile things for buildroot using the `cross-compile` script. (The script sets a bunch of environment variables before calling the command with arguments as passed to it.)
