@@ -7,9 +7,12 @@ import sys
 staging_dir = "/home/vagrant/openwrt/staging_dir"
 toolchain_dir = max(glob.iglob(os.path.join(staging_dir, "toolchain-*")),
                     key=os.path.getctime)
+target_dir = max(glob.iglob(os.path.join(staging_dir, "target-*")),
+                 key=os.path.getctime)
 
 include_dirs = glob.glob("/home/vagrant/openwrt/package/libs/*/src/include/")
 include_dirs.append(os.path.join(toolchain_dir, "include"))
+include_dirs.append(os.path.join(target_dir, "usr", "include"))
 
 gcc_suffix = "-openwrt-linux-uclibc-gcc"
 try:

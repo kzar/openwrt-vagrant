@@ -27,8 +27,6 @@ Next you can cross compile things for buildroot using the `cross-compile` script
 
 ## Compiling Cannon CAPT driver
 
-**This doesn't actually work, I've given up for now :(**
-
      sudo apt-get install libcups2-dev libc6-dev-i386 libglib2.0-dev libgtk2.0-dev libglade2-dev intltool libtool-bin
 
      wget -O ~/capt-2.6.tar.gz http://pdisp01.c-wss.com/gdl/WWUFORedirectTarget.do?id=MDEwMDAwNDU5NjAz&cmp=ABS&lang=EN
@@ -37,8 +35,12 @@ Next you can cross compile things for buildroot using the `cross-compile` script
      tar xvzf cndrvcups-common-2.60-1.tar.gz
      tar xvzf cndrvcups-capt-2.60-1.tar.gz
 
-     cd cndrvcups-common-2.60-1 && cross-compile make gen
-     # KABOOM! - cups/cups.h is missing, despite all packages being installed.
-     #           Not sure how to fix that, I can't find it either
+     cd cndrvcups-common-2.60-1
+     # Now comment out the cngplp line near the bottom of Makefile
+     cross-compile make gen
 
-     cd ../cndrvcups-capt-2.60-1 && cross-compile sh allgen.sh
+     cd ../cndrvcups-capt-2.60-1
+     # Now comment out statusui section at bottom of allgen.sh
+     cross-compile sh allgen.sh
+
+** Now, how do we actually install this stuff on the device?! **
