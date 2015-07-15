@@ -1,7 +1,8 @@
 $openwrt_version = "15.05"
 
 package { ["git-core", "build-essential", "libssl-dev", "libncurses5-dev",
-           "unzip", "subversion", "mercurial", "gawk"]:
+           "unzip", "subversion", "mercurial", "gawk", "xsltproc", "gettext",
+           "bin86"]:
   ensure => present
 }
 
