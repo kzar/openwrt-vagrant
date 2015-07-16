@@ -1,4 +1,5 @@
 $openwrt_version = "15.05"
+$packages = "cups cups-bjnp"
 
 package { ["git-core", "build-essential", "libssl-dev", "libncurses5-dev",
            "unzip", "subversion", "mercurial", "gawk", "xsltproc", "gettext",
@@ -34,7 +35,7 @@ exec { "update_feeds":
   subscribe => File["/home/vagrant/openwrt/feeds.conf"],
 }
 
-exec { "install_feeds":
-  command => "/home/vagrant/openwrt/scripts/feeds install -a",
+exec { "install_packages":
+  command => "/home/vagrant/openwrt/scripts/feeds install ${packages}",
   subscribe => Exec["update_feeds"],
 }
