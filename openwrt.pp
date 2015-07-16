@@ -19,6 +19,11 @@ file { "/usr/local/bin/cross-compile":
   mode => 755,
 }
 
+file { "/home/vagrant/openwrt/.config":
+  source => "/vagrant/config",
+  subscribe => Vcsrepo["/home/vagrant/openwrt"],
+}
+
 file { "/home/vagrant/openwrt/feeds.conf":
   source => "/vagrant/feeds.conf",
   subscribe => Vcsrepo["/home/vagrant/openwrt"],
