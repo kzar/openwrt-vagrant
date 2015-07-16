@@ -19,14 +19,14 @@ file { "/usr/local/bin/cross-compile":
   mode => 755,
 }
 
-file { "/home/vagrant/openwrt/feeds.conf.default":
-  source => "/vagrant/feeds.conf.default",
+file { "/home/vagrant/openwrt/feeds.conf":
+  source => "/vagrant/feeds.conf",
   subscribe => Vcsrepo["/home/vagrant/openwrt"],
 }
 
 exec { "update_feeds":
   command => "/home/vagrant/openwrt/scripts/feeds update -a",
-  subscribe => File["/home/vagrant/openwrt/feeds.conf.default"],
+  subscribe => File["/home/vagrant/openwrt/feeds.conf"],
 }
 
 exec { "install_feeds":
