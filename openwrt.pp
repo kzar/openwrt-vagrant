@@ -1,5 +1,6 @@
 $openwrt_version = "15.05"
 $packages = "cups cups-bjnp"
+$removed_packages = "libpng"
 
 package { ["git-core", "build-essential", "libssl-dev", "libncurses5-dev",
            "unzip", "subversion", "mercurial", "gawk", "xsltproc", "gettext",
@@ -38,4 +39,9 @@ exec { "update_feeds":
 exec { "install_packages":
   command => "/home/vagrant/openwrt/scripts/feeds install ${packages}",
   subscribe => Exec["update_feeds"],
+}
+
+exec { "remove_packages":
+  command => "/home/vagrant/openwrt/scripts/feeds uninstall ${removed_packages}",
+  subscribe => Exec["install_packages"],
 }
